@@ -8,7 +8,6 @@ import { map } from 'rxjs/operators';
 export class SpotifyService {
 
   constructor(private http: HttpClient) {
-    console.log('Spotify Log iniciado');
   }
 
   getNewReleases() {
@@ -18,16 +17,20 @@ export class SpotifyService {
 
   }
 
-  getArtista(termino: string) {
+  getArtistas(termino: string) {
     return this.getQuery(`search?q=${termino}&type=artist&limit=15`)
       .pipe(map((data: any) => data['artists'].items));
+  }
+
+  getArtista(id: string){
+    return this.getQuery(`artists/${id}`);
   }
 
   getQuery(query: string) {
     const url = `https://api.spotify.com/v1/${query}`;
 
     const headers = new HttpHeaders({
-      Authorization: 'Bearer BQD_iTZkGZ1E39v5mSO4Dh7d5XgNDB8r3MCB5kkdydtkm8oXpnYjMgpiC-UGEkGHOGKJAbGhuIHYJtmpSMo'
+      Authorization: 'Bearer BQBja7Rm2KeumMxLal_h4gyVkbAu_9todaeAKU9fAcXhDlOCdedrODAG2OAyk4rNEGAhtQAYl1j8fIeCazU'
     });
 
     return this.http.get(url, { headers });
