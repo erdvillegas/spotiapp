@@ -12,17 +12,22 @@ import { SpotifyService } from '../../services/spotify.service';
 export class ArtistaComponent {
 
   artista: any = {};
+  loading: boolean;
 
   constructor(private route: ActivatedRoute, private spotify: SpotifyService) {
-    this.route.params.subscribe(params => {
-      this.getArtista(params['id']);
-    });
+    this.loading = true;
+    this.route.params.subscribe(
+      params => this.getArtista(params['id']),
+      error => console.warn('error', error),
+      () => this.loading = false
+    );
   }
 
   getArtista(id: string) {
-    this.spotify.getArtista(id).subscribe( artista => {
-      console.log(artista);
-      this.artista = artista;
-    });
+    this.spotify.getArtista(id).subscribe(
+      artista => this.artista = artista,
+      error => console.warn('error', error),
+      () => this.loading = false
+    );
   }
 }

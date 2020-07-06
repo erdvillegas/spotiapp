@@ -19,10 +19,12 @@ export class SearchComponent implements OnInit {
 
   buscar(termino: string) {
     this.loading = true;
-    this.spotify.getArtistas(termino).subscribe((data: any) => {
-      this.artistas = data;
-      this.loading = false;
-    });
+
+    this.spotify.getArtistas(termino).subscribe(
+      (datos: any) => this.artistas = datos,
+      error => console.warn('error', error),
+      () => this.loading = false
+    );
   }
 
 }

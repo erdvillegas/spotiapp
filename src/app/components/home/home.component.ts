@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SpotifyService } from '../../services/spotify.service';
+import { Subscriber, Observer } from 'rxjs';
+
 
 
 
@@ -10,7 +12,6 @@ import { SpotifyService } from '../../services/spotify.service';
 })
 export class HomeComponent implements OnInit {
 
-
   // Lista de las canciones
   nuevasCanciones: any[] = [];
   loading: boolean;
@@ -19,11 +20,11 @@ export class HomeComponent implements OnInit {
 
     this.loading = true;
 
-    this.spotify.getNewReleases().subscribe((data: any) => {
-      console.log(data);
-      this.nuevasCanciones = data;
-      this.loading = false;
-    });
+    this.spotify.getNewReleases().subscribe(
+      datos => this.nuevasCanciones = datos,
+      error => console.warn('error', error),
+      () => this.loading = false
+    );
   }
 
   ngOnInit(): void {
