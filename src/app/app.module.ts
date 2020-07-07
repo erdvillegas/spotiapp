@@ -11,6 +11,7 @@ import { HomeComponent } from './components/home/home.component';
 import { SearchComponent } from './components/search/search.component';
 import { ArtistaComponent } from './components/artista/artista.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
+import { AlertaComponent } from './components/shared/alerta/alerta.component';
 
 // Rutas
 import { ROUTES } from './app.routes';
@@ -33,7 +34,8 @@ import { DomseguroPipe } from './pipes/domseguro.pipe';
     NoimagePipe,
     TarjetasComponent,
     LoadingComponent,
-    DomseguroPipe
+    DomseguroPipe,
+    AlertaComponent
   ],
   imports: [
     BrowserModule,
